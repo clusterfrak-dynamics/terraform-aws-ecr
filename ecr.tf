@@ -4,8 +4,21 @@ locals {
 
 resource "aws_ecr_repository" "ecr" {
   count = length(var.registries)
-  name  = var.registries[count.index]
-  tags  = merge(local.common_tags, var.custom_tags)
+  name  = var.registries[count.index]["name"]
+
+  image_tag_mutability = var.registries[count.index]["image_tag_mutability"]
+
+  image_scanning_configuration {
+    scan_on_push = var.registries[count.index]["scan_on_push"]
+  }
+
+  tags = merge(local.common_tags, var.custom_tags)
+}
+
+resource "aws_ecr_repository_policy" "ecr" {
+  count      = length(var.registries_policies)
+  repository = var.registries_policies[count.index]["name"]
+  policy     = var.registries_policies[count.index]["policy"]
 }
 
 resource "aws_iam_user" "ecr_user" {

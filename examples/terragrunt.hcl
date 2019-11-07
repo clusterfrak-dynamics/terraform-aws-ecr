@@ -30,8 +30,18 @@ inputs = {
   )
 
   registries = [
-    "myproject/one",
-    "myproject/two",
-    "myproject/three"
+    {
+      name = "myproject/one"
+      image_tag_mutability = "MUTABLE"
+      scan_on_push = true
+    }
+  ]
+
+  registries_policies = [
+    {
+      name = "myproject/one"
+      policy = <<POLICY
+POLICY
+    }
   ]
 }

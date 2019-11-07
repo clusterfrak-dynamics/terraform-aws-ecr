@@ -7,7 +7,12 @@ variable "aws" {
 
 variable "registries" {
   type    = any
-  default = {}
+  default = []
+}
+
+variable "registries_policies" {
+  type    = any
+  default = []
 }
 
 variable "custom_tags" {
