@@ -19,6 +19,10 @@ resource "aws_ecr_repository_policy" "ecr" {
   count      = length(var.registries_policies)
   repository = var.registries_policies[count.index]["name"]
   policy     = var.registries_policies[count.index]["policy"]
+
+  depends_on = [
+    aws_ecr_repository.ecr,
+  ]
 }
 
 resource "aws_iam_user" "ecr_user" {
@@ -86,10 +90,10 @@ output "ecr_repositories" {
 }
 
 output "ecr_user_access_key_id" {
-  value = aws_iam_access_key.ecr_user_key[0].id
+  value = aws_iam_access_key.ecr_user_key.*.id
 }
 
 output "ecr_user_secret_access_key" {
-  value     = aws_iam_access_key.ecr_user_key[0].secret
+  value     = aws_iam_access_key.ecr_user_key.*.secret
   sensitive = true
 }
