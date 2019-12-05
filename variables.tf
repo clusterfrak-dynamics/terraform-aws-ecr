@@ -1,10 +1,5 @@
 variable "env" {}
 
-variable "aws" {
-  type    = any
-  default = {}
-}
-
 variable "registries" {
   type    = any
   default = []
