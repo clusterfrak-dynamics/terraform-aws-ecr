@@ -22,3 +22,7 @@ variable "project" {
 variable "prefix" {
   default = ""
 }
+
+variable "prefix_restriction" {
+  default = ""
+}

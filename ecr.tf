@@ -62,7 +62,7 @@ resource "aws_iam_policy" "ecr_user" {
       "ecr:PutImage"
     ],
     "Resource": [
-      "arn:aws:ecr:${var.aws["region"]}:${data.aws_caller_identity.current.account_id}:repository/${var.project}/*"
+      "arn:aws:ecr:${var.aws["region"]}:${data.aws_caller_identity.current.account_id}:repository/${var.prefix_restriction}${var.prefix_restriction != "" ? "/" : ""}*"
     ]
     },
     {
