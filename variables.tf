@@ -26,3 +26,8 @@ variable "prefix" {
 variable "prefix_restriction" {
   default = ""
 }
+
+variable "aws" {
+  type    = any
+  default = {}
+}
